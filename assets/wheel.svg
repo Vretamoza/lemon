@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420" font-family="Segoe UI, Arial, sans-serif">
+<title>Lemon wheel</title>
+<circle cx="210" cy="200" r="172" fill="#FFF3B0" opacity=".55"/>
+<path d="M133.7 59.4 A160 160 0 0 1 286.3 59.4 L239.6 145.5 A62 62 0 0 0 180.4 145.5Z" fill="#232323" stroke="#ffffff" stroke-opacity=".25"/>
+<text x="210.0" y="87.0" text-anchor="middle" font-size="24">🎵</text>
+<text x="210.0" y="109.0" text-anchor="middle" font-size="14" font-weight="600" fill="#f2f2f2">MP3</text>
+<path d="M293.6 63.6 A160 160 0 0 1 369.9 195.8 L272.0 198.4 A62 62 0 0 0 242.4 147.1Z" fill="#FFD43B" stroke="#ffffff" stroke-opacity=".25"/>
+<text x="306.1" y="142.5" text-anchor="middle" font-size="24">🎬</text>
+<text x="306.1" y="164.5" text-anchor="middle" font-size="14" font-weight="600" fill="#1a1a1a">MP4</text>
+<path d="M369.9 204.2 A160 160 0 0 1 293.6 336.4 L242.4 252.9 A62 62 0 0 0 272.0 201.6Z" fill="#232323" stroke="#ffffff" stroke-opacity=".25"/>
+<text x="306.1" y="253.5" text-anchor="middle" font-size="24">👾</text>
+<text x="306.1" y="275.5" text-anchor="middle" font-size="14" font-weight="600" fill="#f2f2f2">GIF</text>
+<path d="M286.3 340.6 A160 160 0 0 1 133.7 340.6 L180.4 254.5 A62 62 0 0 0 239.6 254.5Z" fill="#232323" stroke="#ffffff" stroke-opacity=".25"/>
+<text x="210.0" y="309.0" text-anchor="middle" font-size="24">🖼</text>
+<text x="210.0" y="331.0" text-anchor="middle" font-size="14" font-weight="600" fill="#f2f2f2">PNG</text>
+<path d="M126.4 336.4 A160 160 0 0 1 50.1 204.2 L148.0 201.6 A62 62 0 0 0 177.6 252.9Z" fill="#232323" stroke="#ffffff" stroke-opacity=".25"/>
+<text x="113.9" y="253.5" text-anchor="middle" font-size="24">✨</text>
+<text x="113.9" y="275.5" text-anchor="middle" font-size="14" font-weight="600" fill="#f2f2f2">WebP</text>
+<path d="M50.1 195.8 A160 160 0 0 1 126.4 63.6 L177.6 147.1 A62 62 0 0 0 148.0 198.4Z" fill="#232323" stroke="#ffffff" stroke-opacity=".25"/>
+<text x="113.9" y="142.5" text-anchor="middle" font-size="24">✒</text>
+<text x="113.9" y="164.5" text-anchor="middle" font-size="14" font-weight="600" fill="#f2f2f2">SVG</text>
+<circle cx="210" cy="200" r="56" fill="#161616" stroke="#FFD43B" stroke-width="2"/>
+<text x="210" y="198" text-anchor="middle" font-size="26">🍋</text>
+<text x="210" y="220" text-anchor="middle" font-size="12" fill="#bbb">drop here</text>
+<rect x="130" y="372" width="160" height="28" rx="14" fill="#161616"/><text x="210" y="391" text-anchor="middle" font-size="12" fill="#FFD43B">Ctrl → Tools</text>
+</svg>

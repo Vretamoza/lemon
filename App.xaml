@@ -1,0 +1,6 @@
+<Application x:Class="Lemon.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             ShutdownMode="OnExplicitShutdown">
+    <!-- Sin StartupUri: App.xaml.cs crea la ventana oculta y el ícono de la bandeja. -->
+</Application>

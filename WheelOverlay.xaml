@@ -1,0 +1,20 @@
+<Window x:Class="Lemon.WheelOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LemonWheel"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" ShowInTaskbar="False" ShowActivated="False" Topmost="True">
+
+    <!--
+      Capa transparente que cubre todas las pantallas mientras arrastras.
+      El fondo #01000000 (casi invisible) es necesario: los píxeles 100% transparentes
+      de una ventana con transparencia no reciben el drop.
+      Los elementos de la rueda no tienen hit-test, así que todos los eventos de drag
+      llegan solo a "Surface" (nada de DragLeave falsos entre elementos hijos).
+    -->
+    <Canvas x:Name="Surface" Background="#01000000" AllowDrop="True"
+            DragEnter="Surface_DragEnter" DragOver="Surface_DragOver"
+            DragLeave="Surface_DragLeave" Drop="Surface_Drop">
+        <Canvas x:Name="WheelHost" IsHitTestVisible="False" Visibility="Collapsed"/>
+    </Canvas>
+</Window>

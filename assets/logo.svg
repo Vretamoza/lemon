@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="128" height="128">
+  <title>Lemon</title>
+  <g fill="#FFD43B">
+    <ellipse cx="16" cy="18.5" rx="13" ry="9.5"/>
+    <ellipse cx="3" cy="18.5" rx="3" ry="3.5"/>
+    <ellipse cx="29" cy="18.5" rx="3" ry="3.5"/>
+  </g>
+  <ellipse cx="0" cy="0" rx="6" ry="3" fill="#3FB950" transform="translate(20 6) rotate(-30)"/>
+</svg>
