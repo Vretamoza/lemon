@@ -10,6 +10,8 @@ public enum Tool
     Magick,
     /// <summary>Imagen → SVG: ImageMagick la pasa a blanco y negro y Vectorizer (C#) la traza.</summary>
     Trace,
+    /// <summary>Imagen → recorte: abre el editor (CropWindow) y después ImageMagick aplica el recorte elegido.</summary>
+    Crop,
 }
 
 public static class ToolRunner
@@ -39,7 +41,7 @@ public static class ToolRunner
     }
 
     private const string FfmpegMissing = "No se encontró ffmpeg. Instálalo con: winget install Gyan.FFmpeg";
-    private const string MagickMissing = "No se encontró ImageMagick. Instálalo con: winget install ImageMagick.ImageMagick";
+    internal const string MagickMissing = "No se encontró ImageMagick. Instálalo con: winget install ImageMagick.ImageMagick";
 
     public static Task<(bool Ok, string Log)> RunAsync(Tool tool, IEnumerable<string> args, CancellationToken ct = default) =>
         tool switch
@@ -48,6 +50,7 @@ public static class ToolRunner
             Tool.Ffmpeg => RunProcessAsync(FfmpegPath, new[] { "-hide_banner", "-n" }.Concat(args), FfmpegMissing, ct),
             Tool.Magick => RunProcessAsync(MagickPath, args, MagickMissing, ct),
             Tool.Trace => TraceToSvgAsync(args.ToArray(), ct),
+            Tool.Crop => CropFlow.RunAsync(args.ToArray(), ct),
             _ => throw new ArgumentOutOfRangeException(nameof(tool)),
         };
 
@@ -89,6 +92,14 @@ public static class ToolRunner
     private static async Task<(bool Ok, string Log)> RunProcessAsync(
         string exe, IEnumerable<string> args, string missingMessage, CancellationToken ct)
     {
+        var result = await RunCaptureAsync(exe, args, missingMessage, ct);
+        return (result.Ok, result.Err);
+    }
+
+    /// <summary>Ejecuta un proceso y devuelve su salida estándar (Out) y su salida de error (Err).</summary>
+    internal static async Task<(bool Ok, string Out, string Err)> RunCaptureAsync(
+        string exe, IEnumerable<string> args, string missingMessage, CancellationToken ct)
+    {
         var psi = new ProcessStartInfo(exe)
         {
             UseShellExecute = false,
@@ -106,15 +117,15 @@ public static class ToolRunner
         }
         catch (Win32Exception)
         {
-            return (false, missingMessage);
+            return (false, "", missingMessage);
         }
 
         // Leer ambos streams en paralelo evita que el proceso se bloquee con el buffer lleno.
         var stderr = process.StandardError.ReadToEndAsync(ct);
         var stdout = process.StandardOutput.ReadToEndAsync(ct);
         await process.WaitForExitAsync(ct);
-        await stdout;
+        var output = await stdout;
 
-        return (process.ExitCode == 0, await stderr);
+        return (process.ExitCode == 0, output, await stderr);
     }
 }

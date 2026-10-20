@@ -100,6 +100,8 @@ public static class ActionRegistry
             (i, o) => new[] { "-i", i, "-vn", "-c:a", "aac", "-b:a", "192k", o }),
         Make("mute", "Quitar audio", "", Wheel.Tools, Tool.Ffmpeg, Video, null, "_sin_audio",
             (i, o) => new[] { "-i", i, "-an", "-c:v", "copy", o }),
+        Make("crop", "Recortar", "\uE7A8", Wheel.Tools, Tool.Crop, Raster, null, "_recortada",
+            (i, o) => new[] { i, o }),
         Make("half", "Reducir 50%", "", Wheel.Tools, Tool.Magick, Raster, null, "_50",
             (i, o) => new[] { i, "-resize", "50%", o }),
     })

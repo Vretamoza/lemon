@@ -73,6 +73,9 @@ public partial class MainWindow : Window
         _prevShift = shift;
         _prevCtrl = ctrl;
 
+        // Con el editor de recorte abierto, Shift/Ctrl son del editor: la rueda no debe aparecer encima.
+        if (CropWindow.IsOpen) return;
+
         if (shiftTapped || ctrlTapped)
             Log.Write($"Poll: tecla {(shiftTapped ? "Shift" : "Ctrl")} · mouseDown={mouseDown} · capaVisible={_overlay.IsVisible}");
 
@@ -102,7 +105,19 @@ public partial class MainWindow : Window
             SetStatus($"{action.Title}… ({i + 1}/{files.Length})", Path.GetFileName(files[i]));
             var (output, args) = action.Build(files[i]);
             Log.Write($"{action.Tool}: {string.Join(' ', args)}");
-            var (success, log) = await ToolRunner.RunAsync(action.Tool, args);
+            bool success;
+            string log;
+            try
+            {
+                (success, log) = await ToolRunner.RunAsync(action.Tool, args);
+            }
+            catch (OperationCanceledException)
+            {
+                // El usuario cerró el editor sin aplicar cambios: no es un error.
+                Log.Write($"{action.Title}: cancelado ({Path.GetFileName(files[i])})");
+                continue;
+            }
+
             if (success)
             {
                 outputs.Add(output);
@@ -115,6 +130,14 @@ public partial class MainWindow : Window
                 if (string.IsNullOrWhiteSpace(lastError)) lastError = "Error desconocido. Revisa el log para más detalles.";
                 Log.Write($"{action.Tool} falló: " + lastError);
             }
+        }
+
+        if (failed == 0 && outputs.Count == 0)
+        {
+            // Todo se canceló: sin notificación ni cambios.
+            _running--;
+            if (_running == 0) SetStatus("Cancelado", "No se hizo ningún cambio");
+            return;
         }
 
         Notify(action, files.Length, outputs, failed, lastError);
